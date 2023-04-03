@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Flash Feed</title>
+
+    <style type="text/css" media="all">
+
+      .video-container {
+
+        position: relative;
+
+        width: 100%;
+
+        height: 45vh;
+
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+
+        overflow: hidden;
+
+      }
+
+ body{
+
+   background: black;
+
+ }
+
+      .video-container video {
+
+        position: absolute;
+
+        top: 0;
+
+        left: 0;
+
+        width: 100%;
+
+        height: 100%;
+
+      }
+
+      
+
+      .btn{
+
+        position: absolute;
+
+        bottom:10%;
+
+        font-size: 2rem;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-item:center;
+
+        width: 100%;
+
+        
+
+      }
+
+      .btn a{
+
+        color: black;
+
+        text-align: center;
+
+        background-color: white;
+
+        border-radius: 20px;
+
+        padding: 1.3rem;
+
+        font-family:Sans-Serif;
+
+        text-decoration: none;
+
+        font-weight: bold;;
+
+      }
+
+      *{
+
+        margin: 0;
+
+        padding: 0;
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="video-container">
+
+      <video controls id="my-video" width="640" height="860" autoplay>
+
+        <source src="video.mp4" type="video/mp4" />
+
+      </video>
+
+      
+
+    </div>
+
+   <div class="btn">
+
+     <a target="_blank" href="https://github.com/Siddhantsingh1230/FlashFeedApp">Source Code</a>
+
+   </div>
+
+    <script type="text/javascript" charset="utf-8">
+
+      const video = document.getElementById("my-video");
+
+      const playPauseButton = document.getElementById("play-pause-button");
+
+      const progressBar = document.querySelector(".progress");
+
+      const timebar = document.querySelector(".timebar");
+
+      playPauseButton.addEventListener("click", function () {
+
+        if (video.paused) {
+
+          video.play();
+
+          playPauseButton.classList.remove("play");
+
+          playPauseButton.classList.add("pause");
+
+        } else {
+
+          video.pause();
+
+          playPauseButton.classList.remove("pause");
+
+          playPauseButton.classList.add("play");
+
+        }
+
+      });
+
+      video.addEventListener("timeupdate", function () {
+
+        const progress = (video.currentTime / video.duration) * 100;
+
+        progressBar.style.width = `${progress}%`;
+
+      });
+
+      timebar.addEventListener("click", function (e) {
+
+        const pos = (e.pageX - timebar.offsetLeft) / timebar.offsetWidth;
+
+        video.currentTime = pos * video.duration;
+
+      });
+
+    </script>
+
+  </body>
+
+</html>
+
